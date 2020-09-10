@@ -1,10 +1,11 @@
 //global variables
-var alphabetChar = "abcdefghijklmnopqrstuvwxyz".split("")
-var upperAlphabetChar = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("")
-var numberChar = [1,2,3,4,5,6,7,8,9,0]
-var specialChar = "`~!@#$%^&*()-_+={[}]\\:;\"\'<,>.?/".split("")
+// var alphabetChar = "abcdefghijklmnopqrstuvwxyz".split("")
+// var upperAlphabetChar = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("")
+// var numberChar = [1,2,3,4,5,6,7,8,9,0]
+// var specialChar = "`~!@#$%^&*()-_+={[}]\\:;\"\'<,>.?/".split("")
 var possibleChar = ["abcdefghijklmnopqrstuvwxyz".split(""),"ABCDEFGHIJKLMNOPQRSTUVWXYZ".split(""),[1,2,3,4,5,6,7,8,9,0],"`~!@#$%^&*()-_+={[}]\\:;\"\'<,>.?/".split("")]
 console.log(possibleChar);
+
 // Assignment Code
 var generateBtn = document.querySelector("#generate");
 
@@ -36,26 +37,41 @@ function pwdLength(){
 };
 
 function pwdCriteria() {
-  var include = {
-  lc: true,
-  uc: true,
-  numeric: true,
-  special: true,
-  }
+  var include = {};
   
-  
-  include.lc = confirm(`Ok to include lower case`)
-  include.uc = confirm(`Ok to include upper case`)
-  include.numeric = confirm(`Ok to include numeric values`)
-  include.special = confirm(`Ok to include speical characters`)
+  include.lc = confirm(`Ok to include lower case`);
+  include.uc = confirm(`Ok to include upper case`);
+  include.numeric = confirm(`Ok to include numeric values`);
+  include.special = confirm(`Ok to include speical characters`);
   return include;
 };
 
 function generatePassword(){
   var length = pwdLength();
   var criteria = pwdCriteria();
-  var masterPass = []
-
+  var chosenChar = []
+  
+  if (criteria.lc){
+    for(var i=0; i < possibleChar[0].length; i++){
+      masterPass.push(possibleChar[0][i])
+    }
+  }
+  if (criteria.uc){
+    for(var i=0; i < possibleChar[1].length; i++){
+      masterPass.push(possibleChar[1][i])
+    }
+  }
+  if (criteria.numeric){
+    for(var i=0; i < possibleChar[2].length; i++){
+      masterPass.push(possibleChar[2][i])
+    }
+  }
+  if (criteria.numeric){
+    for(var i=0; i < possibleChar[3].length; i++){
+      masterPass.push(possibleChar[3][i])
+    }
+  }
+  while()
   
 };
 
