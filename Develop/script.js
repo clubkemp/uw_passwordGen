@@ -1,3 +1,10 @@
+//global variables
+var alphabetChar = "abcdefghijklmnopqrstuvwxyz".split("")
+var upperAlphabetChar = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("")
+var numberChar = [1,2,3,4,5,6,7,8,9,0]
+var specialChar = "`~!@#$%^&*()-_+={[}]\\:;\"\'<,>.?/".split("")
+var possibleChar = ["abcdefghijklmnopqrstuvwxyz".split(""),"ABCDEFGHIJKLMNOPQRSTUVWXYZ".split(""),[1,2,3,4,5,6,7,8,9,0],"`~!@#$%^&*()-_+={[}]\\:;\"\'<,>.?/".split("")]
+console.log(possibleChar);
 // Assignment Code
 var generateBtn = document.querySelector("#generate");
 
@@ -28,22 +35,28 @@ function pwdLength(){
   
 };
 
-function criteria {
+function pwdCriteria() {
   var include = {
-  'lowercase': true,
-  'uppercase': true,
-  'numeric': true,
-  'special': true,
+  lc: true,
+  uc: true,
+  numeric: true,
+  special: true,
   }
-  for(var i=0; i<4; i++)
   
+  
+  include.lc = confirm(`Ok to include lower case`)
+  include.uc = confirm(`Ok to include upper case`)
+  include.numeric = confirm(`Ok to include numeric values`)
+  include.special = confirm(`Ok to include speical characters`)
+  return include;
 };
 
 function generatePassword(){
   var length = pwdLength();
-  
+  var criteria = pwdCriteria();
+  var masterPass = []
 
-  console.log(length)
+  
 };
 
 // Add event listener to generate button
