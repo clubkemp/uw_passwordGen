@@ -22,17 +22,20 @@ function pwdLength(){
   while(!pass){
     //setup variable for the passworld lenggth, set it equal to the prompt input
     var pwdL = prompt("How long would you like your password (choose integer between 8-128?")
-    
+    //Check if user put in a number
     if(isNaN(parseInt(pwdL,10) )){
+      //if not a number ask for a number
       alert("You need to put in a number")
     }else{
+      //check if password length
       if(pwdL < 8){
-        console.log("Less than 8")
+        //if less than 8
         alert("Too few")
       }else if(pwdL > 128){
-        console.log("more than 128")
+        //if more the n128
         alert("Too many")
       }else {
+        //in the right length range return the number to uses in generatePassword Function
         return pwdL;
       }
     }
@@ -40,57 +43,74 @@ function pwdLength(){
   
 };
 
+//setup function for gathering the password criteria
 function pwdCriteria() {
+  //empty object to hold our criteria
   var include = {};
   
+  //for eac criteria set the wether to include it to true with the ok statement
   include.lc = confirm(`Ok to include lower case`);
   include.uc = confirm(`Ok to include upper case`);
   include.numeric = confirm(`Ok to include numeric values`);
   include.special = confirm(`Ok to include speical characters`);
+  
+  //return the object for use in generatePassword function
   return include;
 };
 
+//Fisher-Yates shuffler
+Array.prototype.shuffle = function () {
+  //input is Array.prototype
+  var input = this;
+  //iterate through the array, but do it backwards starting with the last item
+  for (var i = input.length - 1; i >= 0; i--) {
+    //grab a random index, behind the item we are shuffling 
+    var randomIndex = Math.floor(Math.random() * (i + 1));
+    //grab a rando index where it is going to go
+    var itemAtIndex = input[randomIndex];
+    //swap the positions
+    input[randomIndex] = input[i];
+    input[i] = itemAtIndex;
+  }
+  return input;
+}
+
 function generatePassword(){
+  //set length to result of helper function
   var length = pwdLength();
+  //set criteria to result of helper function
   var criteria = pwdCriteria();
-  var possibleChars = []
+  //empty arrays for what is possible, and what will be the password
   var chosenPwdArray = []
   
-  if (criteria.lc){
-    for(var i=0; i < charList[0].length; i++){
-      possibleChars
-  .push(charList[0][i])
-    }
-  }
-  if (criteria.uc){
-    for(var i=0; i < charList[1].length; i++){
-      possibleChars
-  .push(charList[1][i])
-    }
-  }
-  if (criteria.numeric){
-    for(var i=0; i < charList[2].length; i++){
-      possibleChars
-  .push(charList[2][i])
-    }
-  }
-  if (criteria.numeric){
-    for(var i=0; i < charList[3].length; i++){
-      possibleChars
-  .push(charList[3][i])
-    }
-  }
-  console.log(possibleChars)
-  console.log(length);
-  console.log(chosenPwdArray.length);
-  
+  //create a while loop that will load characters into our password array until the length criteria is met
   while(chosenPwdArray.length < length){
-    console.log("Running push loop")
-    var randomNum = Math.floor(Math.random()*possibleChars.length)
-    console.log(randomNum);
-    chosenPwdArray.push(possibleChars[randomNum])
+    //each if statment checks to see if the criteria is met
+    if(criteria.lc){
+      //if met, get the length of that sub-array in the character list and randomly pick one out
+      var randomNum = Math.floor(Math.random()*charList[0].length)
+      //once picked out push it to the password array
+      chosenPwdArray.push(charList[0][randomNum])
+    }
+    if(criteria.uc){
+      var randomNum = Math.floor(Math.random()*charList[1].length)
+      chosenPwdArray.push(charList[1][randomNum])
+    }
+    if(criteria.numeric){
+      var randomNum = Math.floor(Math.random()*charList[2].length)
+      chosenPwdArray.push(charList[2][randomNum])
+    }
+    if(criteria.special){
+      var randomNum = Math.floor(Math.random()*charList[3].length)
+      chosenPwdArray.push(charList[3][randomNum])
+    }
+    //since this is a while statement it will hit each one that qualifies and push a character to it, ensuring it has at least 1 of every matching criteria character
   }
-  return chosenPwdArray.join("")
+  console.log(chosenPwdArray);
+  //now shuffle the password so it doesn't follow a pattern
+  var shufflePassword = chosenPwdArray.shuffle()
+  //return the password, but not as an array, as a string joined by nothing.  
+  return shufflePassword.join("")
 
   
 };
