@@ -50,16 +50,30 @@ function pwdLength() {
 //setup function for gathering the password criteria
 function pwdCriteria() {
   //empty object to hold our criteria
-  var include = {};
-
-  //for eac criteria set the wether to include it to true with the ok statement
-  include.lc = confirm(`Ok to include lower case`);
-  include.uc = confirm(`Ok to include upper case`);
-  include.numeric = confirm(`Ok to include numeric values`);
-  include.special = confirm(`Ok to include speical characters`);
-
+  var include = {
+    lc: false,
+    uc: false,
+    numeric: false,
+    special: false,
+  };
+  
+  //setup a while loop that will prompt until at least 1 criteria is chosen
+  while(include){
+    //for each criteria set the wether to include it to true with the ok statement
+    include.lc = confirm(`Ok to include lower case`);
+    include.uc = confirm(`Ok to include upper case`);
+    include.numeric = confirm(`Ok to include numeric values`);
+    include.special = confirm(`Ok to include speical characters`);
+    //If no criteria is chosen alert and restart while loop
+    if(!include.lc && !include.uc && !include.numeric && !include.speical){
+      alert("Must choose at least 1 criteria")
+    }//else return the criteria and break loop if at least 1 criteria is chosen
+    else{
+      return include;
+    };
+  }
   //return the object for use in generatePassword function
-  return include;
+  
 }
 
 //Fisher-Yates shuffler
