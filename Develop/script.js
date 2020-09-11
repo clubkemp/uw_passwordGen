@@ -1,10 +1,5 @@
-//global variables
-// var alphabetChar = "abcdefghijklmnopqrstuvwxyz".split("")
-// var upperAlphabetChar = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("")
-// var numberChar = [1,2,3,4,5,6,7,8,9,0]
-// var specialChar = "`~!@#$%^&*()-_+={[}]\\:;\"\'<,>.?/".split("")
+//global character list. Easier to type out the alphabets and then use split to make them into arrays.
 var charList = ["abcdefghijklmnopqrstuvwxyz".split(""),"ABCDEFGHIJKLMNOPQRSTUVWXYZ".split(""),[1,2,3,4,5,6,7,8,9,0],"`~!@#$%^&*()-_+={[}]\\:;\"\'<,>.?/".split("")]
-console.log(charList);
 
 // Assignment Code
 var generateBtn = document.querySelector("#generate");
@@ -18,19 +13,28 @@ function writePassword() {
   passwordText.value = password;
 
 }
+
+//contains the logic for getting the length of desired password
 function pwdLength(){
-  
+  //setup the stopping variable
   var pass = false
+  //as long as pass is false do...
   while(!pass){
-    pwdLength = prompt("How long would you like your password (choose integer between 8-128?")
-    if(pwdLength < 8){
-      console.log("Less than 8")
-      var pwdLength = alert("Too few")
-    }else if(pwdLength > 128){
-      console.log("more than 128")
-      var pwdLength = alert("Too many")
-    }else {
-      return pwdLength;
+    //setup variable for the passworld lenggth, set it equal to the prompt input
+    var pwdL = prompt("How long would you like your password (choose integer between 8-128?")
+    
+    if(isNaN(parseInt(pwdL,10) )){
+      alert("You need to put in a number")
+    }else{
+      if(pwdL < 8){
+        console.log("Less than 8")
+        alert("Too few")
+      }else if(pwdL > 128){
+        console.log("more than 128")
+        alert("Too many")
+      }else {
+        return pwdL;
+      }
     }
   }
   
