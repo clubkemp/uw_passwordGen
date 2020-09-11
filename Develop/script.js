@@ -3,8 +3,8 @@
 // var upperAlphabetChar = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("")
 // var numberChar = [1,2,3,4,5,6,7,8,9,0]
 // var specialChar = "`~!@#$%^&*()-_+={[}]\\:;\"\'<,>.?/".split("")
-var possibleChar = ["abcdefghijklmnopqrstuvwxyz".split(""),"ABCDEFGHIJKLMNOPQRSTUVWXYZ".split(""),[1,2,3,4,5,6,7,8,9,0],"`~!@#$%^&*()-_+={[}]\\:;\"\'<,>.?/".split("")]
-console.log(possibleChar);
+var charList = ["abcdefghijklmnopqrstuvwxyz".split(""),"ABCDEFGHIJKLMNOPQRSTUVWXYZ".split(""),[1,2,3,4,5,6,7,8,9,0],"`~!@#$%^&*()-_+={[}]\\:;\"\'<,>.?/".split("")]
+console.log(charList);
 
 // Assignment Code
 var generateBtn = document.querySelector("#generate");
@@ -49,29 +49,45 @@ function pwdCriteria() {
 function generatePassword(){
   var length = pwdLength();
   var criteria = pwdCriteria();
-  var chosenChar = []
+  var possibleChars = []
+  var chosenPwdArray = []
   
   if (criteria.lc){
-    for(var i=0; i < possibleChar[0].length; i++){
-      masterPass.push(possibleChar[0][i])
+    for(var i=0; i < charList[0].length; i++){
+      possibleChars
+  .push(charList[0][i])
     }
   }
   if (criteria.uc){
-    for(var i=0; i < possibleChar[1].length; i++){
-      masterPass.push(possibleChar[1][i])
+    for(var i=0; i < charList[1].length; i++){
+      possibleChars
+  .push(charList[1][i])
     }
   }
   if (criteria.numeric){
-    for(var i=0; i < possibleChar[2].length; i++){
-      masterPass.push(possibleChar[2][i])
+    for(var i=0; i < charList[2].length; i++){
+      possibleChars
+  .push(charList[2][i])
     }
   }
   if (criteria.numeric){
-    for(var i=0; i < possibleChar[3].length; i++){
-      masterPass.push(possibleChar[3][i])
+    for(var i=0; i < charList[3].length; i++){
+      possibleChars
+  .push(charList[3][i])
     }
   }
-  while()
+  console.log(possibleChars)
+  console.log(length);
+  console.log(chosenPwdArray.length);
+  
+  while(chosenPwdArray.length < length){
+    console.log("Running push loop")
+    var randomNum = Math.floor(Math.random()*possibleChars.length)
+    console.log(randomNum);
+    chosenPwdArray.push(possibleChars[randomNum])
+  }
+  return chosenPwdArray.join("")
+
   
 };
 
